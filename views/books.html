@@ -1,0 +1,53 @@
+<div class="container">
+	
+
+	<div class="row mt-5 align-items-center">
+	    <div class="col-sm-6">
+	      <h2>Uredi knjige</h2>
+	    </div>
+
+  	</div>
+
+
+	<div ng-controller="booksController">
+		<div class="row mt-3">
+			<div class="col-sm-6">
+				<button type="button" ng-click="bookPopup('add', authors)" class="btn btn-primary">Dodaj novo knjigo</button>
+			</div>
+
+		    <div class="col-sm-3 text-danger">
+		    	<p ng-bind="error"></p>
+		    </div>
+
+		    <div class="col-sm-3">
+		    	<input type="text" placeholder="Iskanje.." ng-model="searchText">
+		    </div>
+		</div>
+
+		<div class="row">
+			<table class="table mt-4">
+		  		<thead class="thead-dark">
+				    <tr>
+				      <th scope="col">Naslov</th>
+				      <th scope="col">Kratek opis</th>
+				      <th scope="col">Avtor</th>
+				      <th scope="col">Datoteka</th>
+				      <th class="text-center" scope="col">Možnosti</th>
+				    </tr>
+			  	</thead>
+				<tbody>
+					<tr ng-repeat="book in books | filter:searchText">
+					  <td ng-bind="book.title"></td>
+					  <td  ng-bind="book.description"></td>
+					  <td>{{book.author ? book.author.name + ' ' + book.author.surname : 'Neznan'}}</td>
+					  <td ><a ng-show="book.file_id" ng-href="{{'https://frontend-test.si.arctur.net/mma/' + book.file_id}}"><button type="button" class="btn btn-info">Prenos</button></a></td>
+					  <td class="text-center">
+						<settings-Button funct="bookPopup('edit', book)"></settings-Button>
+						<remove-Button funct="deleteBook(book)"></remove-Button>
+					  </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

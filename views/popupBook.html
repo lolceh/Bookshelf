@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h3>{{header}}</h3>
+</div>
+<div class="modal-body">
+	<form>
+		<div class="form-group">
+			<label for="titleInput">Naslov knjige</label>
+			<input type="text" class="form-control" id="titleInput" ng-model="book.title" placeholder="Naslov">
+		</div>
+		<div class="form-group">
+			<label for="descriptInput">Kratek opis knjige</label>
+			<input type="text" class="form-control" id="descriptInput" ng-model="book.description" placeholder="Opis">
+		</div>
+
+		<div class="form-group">
+			<label for="descriptInput">Izberi avtorja</label>
+			<select name="" ng-model="book.selectedAuthor" ng-change="loadState()" class="form-control">
+			<option value="">Brez avtorja</option>
+			<option ng-repeat="author in authors" value="{{author.id}}">{{author.name}} {{author.surname}}</option>
+		</select>
+		</div>
+
+        <div class="form-group">
+            <label for="myFileField">Dodaj datoteko: </label>
+            <input type="file" file-model="uploadFile" class="form-control" id="myFileField"/>
+            <button class="form-control btn btn-danger" ng-show="uploadFile" ng-click="clearFile()" id="myFileField">Odstrani datoteke</button>
+        </div>
+
+	</form>
+</div>
+<div class="modal-footer">
+	<div class="text-danger" ng-bind="error"></div>
+	<button type="button" ng-click="submit()" class="btn btn-success" ng-bind="buttonText"></button>
+    <button class="btn btn-danger" ng-click="cancel()">Preklici</button>
+    <input type="file" class="custom-file-input" ng-model="aaa" id="customFile">
+</div>

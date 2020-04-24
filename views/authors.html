@@ -1,0 +1,52 @@
+<div class="container">
+	
+
+	<div class="row mt-5 align-items-center">
+	    <div class="col-sm-6">
+	      <h2>Uredi avtorje</h2>
+	    </div>
+
+  	</div>
+
+
+	<div ng-controller="authorsController">
+		<div class="row mt-3">
+			<div class="col-sm-8">
+				<button type="button" ng-click="authorPopup('add')" class="btn btn-primary">Dodaj novega avtorja</button>
+			</div>
+
+			<div class="col-sm-2 text-danger">
+				<p ng-bind="error"></p>
+			</div>
+
+		    <div class="col-sm-2">
+		    	<input type="text" placeholder="Iskanje.." ng-model="searchText">
+		    </div>
+		</div>
+
+
+		<div class="row">
+			<table class="table mt-4">
+		  		<thead class="thead-dark">
+				    <tr>
+				      <th scope="col">Ime</th>
+				      <th scope="col">Priimek</th>
+				      <th scope="col">Datum rojstva</th>
+				      <th class="text-center" scope="col">Možnosti</th>
+				    </tr>
+			  	</thead>
+				<tbody>
+					<tr ng-repeat="author in authors | filter:searchText">
+					  <td ng-bind="author.name"></td>
+					  <td ng-bind="author.surname"></td>
+					  <td>{{author.dateBirth ? (author.dateBirth | asDate | date:'yyyy/MM/dd') : 'Neznano'}}</td> 
+					  <td class="text-center">
+						<settings-Button funct="authorPopup('edit', author)"></settings-Button>
+						<remove-Button funct="deleteAuthor(author)"></remove-Button>
+					  </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
